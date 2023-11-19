@@ -32,4 +32,4 @@ jobs:
             steps.generate-dummy-string.outputs.DUMMY_VALUE_CREATED_BY_TYPESCRIPT_CODE
             }}
         run: |
-          echo  ${{ DUMMY_VALUE }}
+          echo  ${{ env.DUMMY_VALUE }}
