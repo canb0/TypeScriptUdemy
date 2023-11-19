@@ -1,0 +1,21 @@
+---
+name: Demo Workflow
+on:
+  workflow_dispatch: null
+jobs:
+  build:
+    name: Test run trigger
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3.3.0
+
+      - name: Execute cUrl Command
+        run: |
+            response=$(curl -X 'GET' 'https://petstore.swagger.io/v2/pet/findByStatus?status=available' -H 'accept: application/json')
+            echo "::set-output name=response::$response"
+
+      - name: Parse JSON Response
+        run: |
+            parsed_value=$(echo ${{ steps.curl_and_parse.outputs.response }} | jq -r '.id')
+            echo "Parsed Value: $parsed_value"
