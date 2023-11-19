@@ -9,17 +9,23 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3.3.0
+
       - name: Setup Nodejs
         uses: actions/setup-node@v3.6.0
         with:
           node-version: "16"
+
       - name: Build application
         run: npm install
+
       - name: Install ts-node globally
         run: npm install -g ts-node
+
       - name: Generate Dummy String
-        run: ts-node src/helpers/StringGenerator.ts
+        run: |
+            ts-node src/helpers/StringGenerator.ts
         id: generate-dummy-string
+
       - name: Print the Dummy Value
         env:
           DUMMY_VALUE: ${{
