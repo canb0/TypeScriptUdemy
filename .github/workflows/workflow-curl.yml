@@ -13,9 +13,9 @@ jobs:
       - name: Execute cUrl Command
         run: |
             response=$(curl -X 'GET' 'https://petstore.swagger.io/v2/pet/1' -H 'accept: application/json')
-            echo "::set-output name=response::$response"
+            echo "response=$response" >> $GITHUB_ENV
 
       - name: Parse JSON Response
         run: |
-            parsed_value=$(echo ${{ steps.curl_and_parse.outputs.response }} | jq -r '.id')
-            echo Response ID is:" $parsed_value"
+            parsed_value=$(echo "${{ env.response }}" | jq -r '.id')
+            echo "Parsed Value: $parsed_value"
