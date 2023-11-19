@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "outDir": "./.tsbuild/",
+        "sourceMap": false,
+        "target": "es2022",
+        "module": "commonjs",
+        "removeComments": true,
+        "noImplicitAny": true,
+        "rootDir": "./src",
+        "strictPropertyInitialization": true,
+        "strictNullChecks": true,
+        "types": [
+            "node",
+        ]
+    },
+    "include": [
+        "src/**/*",
+        "test/**/*",
+        "./config/**/*.ts",
+        "./tests/**/*.ts", ]
+}

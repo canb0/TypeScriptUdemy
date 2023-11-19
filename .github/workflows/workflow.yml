@@ -1,0 +1,45 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Demo Workflow
+
+# Controls when the workflow will run 
+on:
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    name: Test run trigger
+    
+    # The type of runner that the job will run on
+    # runs-on: ah-digital-generic
+    runs-on: ubuntu-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Preparation
+      - name: Checkout repo
+        uses: actions/checkout@v3.3.0
+
+      - name: Setup Nodejs
+        uses: actions/setup-node@v3.6.0
+        with:
+          node-version: "16"
+
+      - name: 'Build application'
+        run: npm install
+
+      - name: 'Install ts-node globally'
+        run: npm install -g ts-node
+
+      - name: 'Generate Dummy String'
+        run:
+          ts-node src/helpers/StringGenerator.ts
+        id:
+          generate-dummy-string
+          
+      - name: 'Print the Dummy Value'
+          env: 
+            DUMMY_VALUE: ${{ steps.generate-dummy-string.outputs.DUMMY_VALUE_CREATED_BY_TYPESCRIPT_CODE }}
+        run: |
+          echo  ${{ DUMMY_VALUE }}
