@@ -12,10 +12,10 @@ jobs:
 
       - name: Execute cUrl Command
         run: |
-            response=$(curl -X 'GET' 'https://petstore.swagger.io/v2/pet/findByStatus?status=available' -H 'accept: application/json')
+            response=$(curl -X 'GET' 'https://petstore.swagger.io/v2/pet/1' -H 'accept: application/json')
             echo "::set-output name=response::$response"
 
       - name: Parse JSON Response
         run: |
             parsed_value=$(echo ${{ steps.curl_and_parse.outputs.response }} | jq -r '.id')
-            echo "Parsed Value: $parsed_value"
+            echo Response ID is:" $parsed_value"
