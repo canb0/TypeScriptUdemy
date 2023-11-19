@@ -17,5 +17,5 @@ jobs:
 
       - name: Parse JSON Response
         run: |
-            parsed_value=$(echo "${{ env.response }}" | jq -r '.id')
+            parsed_value=$(echo "${{ env.response }}" | jq -r '.message')
             echo "Parsed Value: $parsed_value"
